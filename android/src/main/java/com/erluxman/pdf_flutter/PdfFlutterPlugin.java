@@ -1,13 +1,22 @@
 package com.erluxman.pdf_flutter;
 
-import io.flutter.plugin.common.PluginRegistry.Registrar;
+import androidx.annotation.NonNull;
 
-/** PdfFlutterPlugin */
-public class PdfFlutterPlugin {
-  public static void registerWith(Registrar registrar) {
-    registrar
-            .platformViewRegistry()
-            .registerViewFactory(
-                    "pdf_flutter_plugin", new PdfFlutterFactory(registrar.messenger()));
-  }
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
+
+/**
+ * PdfFlutterPlugin
+ */
+public class PdfFlutterPlugin implements FlutterPlugin {
+
+    @Override
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+        binding.getPlatformViewRegistry().registerViewFactory(
+                "pdf_flutter_plugin", new PdfFlutterFactory(binding.getBinaryMessenger()));
+    }
+
+    @Override
+    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+
+    }
 }
